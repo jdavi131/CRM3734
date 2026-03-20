@@ -36,7 +36,7 @@ Les criminologues pose des questions importantes pour lesquels les réponses rel
 . . .
 
 ::: {.callout-important title="Élément important"}
-Les méthodes quantantitatives ne sont pas seulement un ensemble de calculs. C'est d'abord **une approche systématique pour raisonner avec des données numériques et catégorielles souvent imparfaites**.
+Les méthodes quantantitatives ne sont pas seulement un ensemble de calculs. C'est d'abord **une approche systématique pour raisonner avec des données numériques et catégorielles** souvent imparfaites.
 :::
 
 ---
@@ -44,27 +44,28 @@ Les méthodes quantantitatives ne sont pas seulement un ensemble de calculs. C'e
 ## Deux regards sur un même phénomène
 
 Les méthodes quantitatives et qualitatives ne s'opposent pas. Elles répondent à des questions différentes et deviennent bien souvent complémentaires.
+  
+\
 
 . . .
 
 ::: columns
-::: {.column width="48%"}
-### Approche qualitative
 
-* Cherche le sens, le contexte, l'expérience
-* S'appuie sur des entretiens, observations, récits, dossiers
-* Aide à comprendre le **comment** et le **pourquoi**
+::: {.column width="50%"}
+#### Approche qualitative
+
+* Cherche le sens, le contexte, l'expérience.
+* S'appuie sur des entretiens, observations, récits, dossiers.
+* Aide à comprendre le **comment** et le **pourquoi**.
 
 :::
 
-. . .
+::: {.column width="50%"}
+#### Approche quantitative
 
-::: {.column width="48%"}
-### Approche quantitative
-
-* Cherche les régularités, les écarts, les tendances
-* S'appuie sur des données numériques et catégorielles
-* Aide à comprendre le **combien**, **à quelle fréquence**, le **pour qui**
+* Cherche les régularités, les écarts, les tendances.
+* S'appuie sur des données numériques et catégorielles.
+* Aide à comprendre le **combien**, **à quelle fréquence**, **pour qui.**
 
 :::
 
@@ -74,11 +75,15 @@ Les méthodes quantitatives et qualitatives ne s'opposent pas. Elles répondent 
 
 ## Les méthodes quantitatives et les statistiques
 
-::: {.callout-tip title="Explication"}
+. . .
+
 Les **méthodes quantitatives** constituent l’approche globale de recherche basée sur des données numériques et catégorielles.
 
+. . .
+
 Les **statistiques** représente l’ensemble des techniques utilisés pour analyser les données.
-:::
+
+. . .
 
 ```{python}
 import matplotlib.pyplot as plt
