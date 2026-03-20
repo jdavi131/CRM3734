@@ -4,21 +4,27 @@ subtitle: "CRM3734: Méthodes quantitatives en criminologie"
 author: "Jean-Denis David, Ph.D."
 date: today
 date-format: "YYYY"
+editor: visual
 format:
   revealjs:
     height: 800
     width: 1400
+    embed-resources: true
   pdf: default
 filters:
   - remove-pauses.lua
-editor: visual
+  - pdf-slides-pages.lua
+execute:
+  echo: false
+  message: false
+  warning: false
 ---
 
 ```{r}
-#| echo: false
-#| message: false
 library(reticulate)
 use_virtualenv("~/.virtualenvs/r-reticulate", required = TRUE)
+fig_scale <- if (knitr::is_latex_output()) 0.40 else 1
+if (knitr::is_latex_output()) knitr::opts_chunk$set(fig.env = "center")
 ```
 
 ------------------------------------------------------------------------
@@ -51,7 +57,7 @@ Les méthodes quantantitatives ne sont pas seulement un ensemble de calculs. C'e
 
 Les méthodes quantitatives et qualitatives ne s'opposent pas. Elles répondent à des questions différentes et deviennent bien souvent complémentaires.
 
-\
+<br>
 
 . . .
 
@@ -79,31 +85,35 @@ Les méthodes quantitatives et qualitatives ne s'opposent pas. Elles répondent 
 
 . . .
 
-Les **méthodes quantitatives** constituent l’approche globale de recherche basée sur des données numériques et catégorielles.
+Les **méthodes quantitatives** représentent l’approche globale de recherche basée sur des données numériques et catégorielles.
 
 . . .
 
-Les **statistiques** représente l’ensemble des techniques utilisés pour analyser les données.
+Les **statistiques** forment l'ensemble des techniques utilisés pour analyser ces données.
 
 . . .
 
+::: {style="margin-top: -20px;"}
 ```{r}
-#| echo: false
-#| message: false
 #| fig-align: center
-#| fig-height: 4
-#| fig-width: 4
+#| fig-height: !expr if (knitr::is_latex_output()) 2 else 6
+#| fig-width: !expr if (knitr::is_latex_output()) 2 else 6
 library(ggplot2)
 library(ggforce)
 
 ggplot() +
-  geom_circle(aes(x0 = 0, y0 = 0, r = 2), color = "black", fill = NA, linewidth = 0.5) +
-  geom_circle(aes(x0 = 0, y0 = 0, r = 1), color = "black", fill = NA, linewidth = 0.5) +
-  annotate("text", x = 0, y = 0,   label = "Statistiques",          size = 4.5) +
-  annotate("text", x = 0, y = 2.5, label = "Méthodes quantitatives", size = 4.5) +
-  coord_fixed(xlim = c(-3.5, 3.5), ylim = c(-3, 3.5)) +
+  geom_circle(aes(x0 = 0, y0 = 0, r = 2), color = "black", fill = "#4F94CD", 
+              linewidth = 0.7) +
+  geom_circle(aes(x0 = 0, y0 = 0, r = 1), color = "black", fill = "#B9D3EE", 
+              linewidth = 0.7) +
+  annotate("text", x = 0, y = 0,   label = "Statistiques", 
+           size = 7 * fig_scale) +
+  annotate("text", x = 0, y = 2.3, label = "Méthodes quantitatives", 
+           size = 8 * fig_scale) + coord_fixed(xlim = c(-2.5, 2.5), 
+                                             ylim = c(-2.5, 2.5)) +
   theme_void()
 ```
+:::
 
 ## Définitions
 
@@ -192,16 +202,14 @@ Le premier réflexe d'un bon analyste n'est pas seulement de se demander "que di
 Certaines formes de victimisation ou d'infraction restent partiellement invisibles dans les statistiques officielles.
 
 ```{r}
-#| echo: false
-#| message: false
 #| fig-align: center
-#| fig-height: 4
-#| fig-width: 4
+#| fig-height: !expr if (knitr::is_latex_output()) 3 else 4
+#| fig-width: !expr if (knitr::is_latex_output()) 3 else 4
 ggplot() +
   geom_circle(aes(x0 = 0, y0 = 0, r = 2), color = "black", fill = NA, linewidth = 0.5) +
   geom_circle(aes(x0 = 0, y0 = 0, r = 1), color = "black", fill = NA, linewidth = 0.5) +
-  annotate("text", x = 0, y = 0,   label = "Les infractions déclarées", size = 4) +
-  annotate("text", x = 0, y = 2.5, label = "Ensemble des infractions",  size = 4) +
+  annotate("text", x = 0, y = 0,   label = "Les infractions déclarées", size = 4 * fig_scale) +
+  annotate("text", x = 0, y = 2.5, label = "Ensemble des infractions",  size = 4 * fig_scale) +
   coord_fixed(xlim = c(-3.5, 3.5), ylim = c(-3, 3.5)) +
   theme_void()
 ```
@@ -382,11 +390,9 @@ Le premier réflexe d'un bon analyste n'est pas seulement "Que disent les chiffr
 Certaines formes de victimisation ou d'infraction restent partiellement invisibles dans les statistiques officielles.
 
 ```{r}
-#| echo: false
-#| message: false
 #| fig-align: center
-#| fig-height: 4
-#| fig-width: 9
+#| fig-height: !expr if (knitr::is_latex_output()) 3 else 4
+#| fig-width: !expr if (knitr::is_latex_output()) 6 else 9
 ggplot() +
   geom_circle(aes(x0 = 0, y0 = 0, r = 3), color = "#333", fill = NA, linewidth = 0.7) +
   geom_circle(aes(x0 = 0, y0 = 0, r = 2), color = "#555", fill = NA, linewidth = 0.7) +
@@ -394,12 +400,12 @@ ggplot() +
   annotate("segment", x = 3*cos(pi/5),  xend = 4, y = 3*sin(pi/5),  yend =  2.5, color = "#888") +
   annotate("segment", x = 2*cos(pi/12), xend = 4, y = 2*sin(pi/12), yend =  0.0, color = "#888") +
   annotate("segment", x = cos(-pi/4),   xend = 4, y = sin(-pi/4),   yend = -2.5, color = "#888") +
-  annotate("text", x = 4.2, y =  2.8, label = "Phénomène social plus large",                    hjust = 0, fontface = "bold", size = 3.5) +
-  annotate("text", x = 4.2, y =  2.2, label = "Actes, expériences, incidents réels",            hjust = 0, size = 3, color = "#555") +
-  annotate("text", x = 4.2, y =  0.3, label = "Partie portée à l'attention des institutions",   hjust = 0, fontface = "bold", size = 3.5) +
-  annotate("text", x = 4.2, y = -0.3, label = "Signalements, prises en charge, enregistrements", hjust = 0, size = 3, color = "#555") +
-  annotate("text", x = 4.2, y = -2.2, label = "Statistiques officielles",                       hjust = 0, fontface = "bold", size = 3.5) +
-  annotate("text", x = 4.2, y = -2.8, label = "Ce qui devient effectivement compté",            hjust = 0, size = 3, color = "#555") +
+  annotate("text", x = 4.2, y =  2.8, label = "Phénomène social plus large",                    hjust = 0, fontface = "bold", size = 3.5 * fig_scale) +
+  annotate("text", x = 4.2, y =  2.2, label = "Actes, expériences, incidents réels",            hjust = 0, size = 3 * fig_scale, color = "#555") +
+  annotate("text", x = 4.2, y =  0.3, label = "Partie portée à l'attention des institutions",   hjust = 0, fontface = "bold", size = 3.5 * fig_scale) +
+  annotate("text", x = 4.2, y = -0.3, label = "Signalements, prises en charge, enregistrements", hjust = 0, size = 3 * fig_scale, color = "#555") +
+  annotate("text", x = 4.2, y = -2.2, label = "Statistiques officielles",                       hjust = 0, fontface = "bold", size = 3.5 * fig_scale) +
+  annotate("text", x = 4.2, y = -2.8, label = "Ce qui devient effectivement compté",            hjust = 0, size = 3 * fig_scale, color = "#555") +
   coord_fixed(xlim = c(-4, 13), ylim = c(-4.5, 4.5)) +
   theme_void()
 ```
@@ -524,11 +530,9 @@ Elles répondent à la question :
 ## Pourquoi décrire ne suffit pas toujours
 
 ```{r}
-#| echo: false
-#| message: false
 #| fig-align: center
-#| fig-height: 3.5
-#| fig-width: 8
+#| fig-height: !expr if (knitr::is_latex_output()) 2.5 else 3.5
+#| fig-width: !expr if (knitr::is_latex_output()) 6 else 8
 dots_small <- data.frame(x = seq(0.7, 3.8, by = 0.6), y = rep(0.4, 6))
 dots_large <- data.frame(
   x = c(seq(5.3, 9.2, by = 0.5), seq(5.5, 9.0, by = 0.5), seq(5.3, 9.2, by = 0.5)),
@@ -537,18 +541,17 @@ dots_large <- data.frame(
 ggplot() +
   geom_rect(aes(xmin = 0,   xmax = 4.5, ymin = 0, ymax = 5), fill = NA,       color = "#aaa",    linewidth = 0.7) +
   geom_rect(aes(xmin = 5.5, xmax = 10,  ymin = 0, ymax = 5), fill = "#f0f4f8", color = "#7788aa", linewidth = 0.7) +
-  annotate("text", x = 2.25, y = 4.5, label = "Petit échantillon",                fontface = "bold", size = 4.5) +
-  annotate("text", x = 2.25, y = 3.9, label = "Quelques observations seulement",  size = 3.2, color = "#666") +
-  annotate("text", x = 2.25, y = 2.7, label = "Un petit nombre de cas peut\nmodifier fortement l'impression générale.", size = 3.2, lineheight = 1.3) +
-  annotate("text", x = 7.75, y = 4.5, label = "Grand échantillon",                fontface = "bold", size = 4.5) +
-  annotate("text", x = 7.75, y = 3.9, label = "Beaucoup plus d'observations",     size = 3.2, color = "#666") +
-  annotate("text", x = 7.75, y = 2.7, label = "Le portrait devient plus stable,\nplus robuste, moins sensible à quelques cas.", size = 3.2, lineheight = 1.3) +
+  annotate("text", x = 2.25, y = 4.5, label = "Petit échantillon",                fontface = "bold", size = 4.5 * fig_scale) +
+  annotate("text", x = 2.25, y = 3.9, label = "Quelques observations seulement",  size = 3.2 * fig_scale, color = "#666") +
+  annotate("text", x = 2.25, y = 2.7, label = "Un petit nombre de cas peut\nmodifier fortement l'impression générale.", size = 3.2 * fig_scale, lineheight = 1.3) +
+  annotate("text", x = 7.75, y = 4.5, label = "Grand échantillon",                fontface = "bold", size = 4.5 * fig_scale) +
+  annotate("text", x = 7.75, y = 3.9, label = "Beaucoup plus d'observations",     size = 3.2 * fig_scale, color = "#666") +
+  annotate("text", x = 7.75, y = 2.7, label = "Le portrait devient plus stable,\nplus robuste, moins sensible à quelques cas.", size = 3.2 * fig_scale, lineheight = 1.3) +
   geom_point(data = dots_small, aes(x = x, y = y), size = 3,   color = "#aaa") +
   geom_point(data = dots_large, aes(x = x, y = y), size = 2.5, color = "#7788aa") +
   coord_cartesian(xlim = c(-0.5, 10.5), ylim = c(-0.2, 6)) +
   theme_void()
 ```
-
 
 ::: fig-note
 L'idée du jour n'est pas la formule. C'est l'intuition suivante : un résultat fondé sur très peu d'observations est plus fragile.
@@ -587,11 +590,9 @@ Le plus souvent, nous travaillons avec un **échantillon**, puis nous essayons d
 ## Voir la différence
 
 ```{r}
-#| echo: false
-#| message: false
 #| fig-align: center
-#| fig-height: 4
-#| fig-width: 9
+#| fig-height: !expr if (knitr::is_latex_output()) 3 else 4
+#| fig-width: !expr if (knitr::is_latex_output()) 6 else 9
 pop  <- expand.grid(x = seq(0.4, 2.8, by = 0.48), y = seq(1.1, 3.9, by = 0.56))
 sel  <- pop[c(3, 7, 12, 16, 20, 25, 30), ]
 pop2 <- data.frame(x = pop$x + 3.8, y = pop$y)
@@ -602,9 +603,9 @@ ggplot() +
   geom_rect(aes(xmin = 0,   xmax = 3.3, ymin = 0.5, ymax = 4.5), fill = NA,        color = "#aaa",    linewidth = 0.7) +
   geom_rect(aes(xmin = 3.8, xmax = 7.1, ymin = 0.5, ymax = 4.5), fill = NA,        color = "#aaa",    linewidth = 0.7) +
   geom_rect(aes(xmin = 7.3, xmax = 10,  ymin = 0.5, ymax = 4.5), fill = "#f0f4f8", color = "#7788aa", linewidth = 0.7) +
-  annotate("text", x = 1.65, y = 5.0, label = "Population",          fontface = "bold", size = 4) +
-  annotate("text", x = 5.45, y = 5.0, label = "Unités sélectionnées", fontface = "bold", size = 4) +
-  annotate("text", x = 8.65, y = 5.0, label = "Échantillon observé",  fontface = "bold", size = 4) +
+  annotate("text", x = 1.65, y = 5.0, label = "Population",          fontface = "bold", size = 4 * fig_scale) +
+  annotate("text", x = 5.45, y = 5.0, label = "Unités sélectionnées", fontface = "bold", size = 4 * fig_scale) +
+  annotate("text", x = 8.65, y = 5.0, label = "Échantillon observé",  fontface = "bold", size = 4 * fig_scale) +
   annotate("segment", x = 3.3, xend = 3.75, y = 2.5, yend = 2.5,
            arrow = arrow(length = unit(0.25, "cm"), type = "closed"), color = "#555", linewidth = 0.8) +
   annotate("segment", x = 7.1, xend = 7.25, y = 2.5, yend = 2.5,
@@ -665,18 +666,16 @@ En criminologie, cette erreur est coûteuse :
 ## Exemple classique
 
 ```{r}
-#| echo: false
-#| message: false
 #| fig-align: center
-#| fig-height: 3.5
-#| fig-width: 8
+#| fig-height: !expr if (knitr::is_latex_output()) 2.5 else 3.5
+#| fig-width: !expr if (knitr::is_latex_output()) 6 else 8
 ggplot() +
   geom_rect(aes(xmin = 3,   xmax = 7,  ymin = 3.5, ymax = 5),   fill = "#e8edf5", color = "#7788aa", linewidth = 0.8) +
   geom_rect(aes(xmin = 0,   xmax = 4,  ymin = 0,   ymax = 1.5), fill = NA,        color = "#aaa",    linewidth = 0.7) +
   geom_rect(aes(xmin = 6,   xmax = 10, ymin = 0,   ymax = 1.5), fill = NA,        color = "#aaa",    linewidth = 0.7) +
-  annotate("text", x = 5,    y = 4.25, label = "Taille de la ville",             fontface = "bold", size = 4.5) +
-  annotate("text", x = 2,    y = 0.75, label = "Plus de policiers",              size = 4) +
-  annotate("text", x = 8,    y = 0.75, label = "Plus d'infractions enregistrées", size = 4) +
+  annotate("text", x = 5,    y = 4.25, label = "Taille de la ville",             fontface = "bold", size = 4.5 * fig_scale) +
+  annotate("text", x = 2,    y = 0.75, label = "Plus de policiers",              size = 4 * fig_scale) +
+  annotate("text", x = 8,    y = 0.75, label = "Plus d'infractions enregistrées", size = 4 * fig_scale) +
   annotate("segment", x = 4.2, xend = 2.5, y = 3.5, yend = 1.5,
            arrow = arrow(length = unit(0.25, "cm"), type = "closed"), color = "#555", linewidth = 0.8) +
   annotate("segment", x = 5.8, xend = 7.5, y = 3.5, yend = 1.5,

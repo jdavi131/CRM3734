@@ -1,0 +1,50 @@
+---
+title: "Cours X: Titre du cours"
+subtitle: "CRM3734: Méthodes quantitatives en criminologie"
+author: "Jean-Denis David, Ph.D."
+date: today
+date-format: "YYYY"
+editor: visual
+format:
+  revealjs:
+    height: 800
+    width: 1400
+    embed-resources: true
+  pdf: default
+filters:
+  - remove-pauses.lua
+  - pdf-slides-pages.lua
+execute:
+  echo: false
+  message: false
+  warning: false
+---
+
+```{r}
+library(reticulate)
+use_virtualenv("~/.virtualenvs/r-reticulate", required = TRUE)
+library(ggplot2)
+library(ggforce)
+fig_scale <- if (knitr::is_latex_output()) 0.65 else 1
+if (knitr::is_latex_output()) knitr::opts_chunk$set(fig.env = "center")
+```
+
+<!-- Patron pour les chunks de figures (taille adaptée selon le format) :
+```{r}
+#| fig-align: center
+#| fig-height: !expr if (knitr::is_latex_output()) 3 else 5
+#| fig-width:  !expr if (knitr::is_latex_output()) 6 else 9
+```
+-->
+
+## Première diapositive
+
+Contenu...
+
+. . .
+
+- Point 1
+
+. . .
+
+- Point 2
