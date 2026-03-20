@@ -10,15 +10,12 @@ height: 800
 width: 1400
 ---
 
-```{python}
-install.packages("reticulate")
+```{r}
 library(reticulate)
-
-# Optional: specify a Python environment
-use_python("/usr/bin/python3")  # or your local path
+use_virtualenv("~/.virtualenvs/r-reticulate", required = TRUE)
 ```
 
-------------------------------------------------------------------------
+---
 
 ## Pourquoi apprendre les méthodes quantitatives?
 
@@ -26,15 +23,15 @@ Les criminologues pose des questions importantes pour lesquels les réponses rel
 
 . . .
 
--   *Les peines plus sévères réduisent-elles vraiment la criminalité?*
+- *Les peines plus sévères réduisent-elles vraiment la criminalité?*
 
 . . .
 
--   *La surreprésentation des autochtones dans les milieux carcéraux a-t-elle augmentées depuis 1990?*
+- *La surreprésentation des autochtones dans les milieux carcéraux a-t-elle augmentées depuis 1990?*
 
 . . .
 
--   *En quelle mesures les quartiers défavorisés sont-ils assujeti à une présence policières accrue comparativement aux quartiers mieux nanties?*
+- *En quelle mesures les quartiers défavorisés sont-ils assujeti à une présence policières accrue comparativement aux quartiers mieux nanties?*
 
 . . .
 
@@ -42,7 +39,7 @@ Les criminologues pose des questions importantes pour lesquels les réponses rel
 Les méthodes quantantitatives ne sont pas seulement un ensemble de calculs. C'est d'abord **une approche systématique pour raisonner avec des données numériques et catégorielles souvent imparfaites**.
 :::
 
-------------------------------------------------------------------------
+---
 
 ## Deux regards sur un même phénomène
 
@@ -50,25 +47,29 @@ Les méthodes quantitatives et qualitatives ne s'opposent pas. Elles répondent 
 
 . . .
 
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: columns
+::: columns
 ::: {.column width="48%"}
 ### Approche qualitative
 
--   Cherche le sens, le contexte, l'expérience
--   S'appuie sur des entretiens, observations, récits, dossiers
--   Aide à comprendre le **comment** et le **pourquoi**
+* Cherche le sens, le contexte, l'expérience
+* S'appuie sur des entretiens, observations, récits, dossiers
+* Aide à comprendre le **comment** et le **pourquoi**
 :::
 
 . . .
 
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: {.column width="48%"}
+::: {.column width="48%"}
 ### Approche quantitative
 
--   Cherche les régularités, les écarts, les tendances
--   S'appuie sur des données numériques et catégorielles
--   Aide à comprendre le **combien**, **à quelle fréquence**, le **pour qui**
+* Cherche les régularités, les écarts, les tendances
+* S'appuie sur des données numériques et catégorielles
+* Aide à comprendre le **combien**, **à quelle fréquence**, le **pour qui**
 
-------------------------------------------------------------------------
+:::
+
+:::
+
+---
 
 ## Les méthodes quantitatives et les statistiques
 
@@ -130,7 +131,7 @@ Les données catégorielles sont des informations classées en catégories ou gr
 *Les victimes, les accusés et les témoins.*
 :::
 
-------------------------------------------------------------------------
+---
 
 ## D'où viennent les données criminologiques?
 
@@ -158,7 +159,7 @@ Les données du cours ressembleront à celles utilisées dans la pratique :
 :::
 ::::::::
 
-------------------------------------------------------------------------
+---
 
 ## Données incomplètes
 
@@ -228,7 +229,20 @@ plt.show()
 Plus le phénomène est sensible, stigmatisé, privé ou difficile à déclarer, plus l'écart entre le cercle extérieur et le centre peut être grand.
 :::
 
-------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+------
 
 ## Le fil conducteur de la session
 
@@ -248,7 +262,7 @@ Que peut-on apprendre sur le crime, les institutions et les inégalités à part
 `3.` établir les grandes idées du cours sans vous noyer dans la technique
 :::
 
-------------------------------------------------------------------------
+---
 
 ## La statistique, en une phrase
 
