@@ -1,0 +1,875 @@
+---
+title: "Cours 1: Pourquoi apprendre les méthodes quantitatives?"
+subtitle: "CRM3734: Méthodes quantitatives en criminologie"
+author: "Jean-Denis David, Ph.D."
+date: today
+date-format: "YYYY"
+format: revealjs
+editor: visual
+height: 800
+width: 1400
+---
+
+```{python}
+install.packages("reticulate")
+library(reticulate)
+
+# Optional: specify a Python environment
+use_python("/usr/bin/python3")  # or your local path
+```
+
+------------------------------------------------------------------------
+
+## Pourquoi apprendre les méthodes quantitatives?
+
+Les criminologues pose des questions importantes pour lesquels les réponses relèvent fréquement de données de nature numérique et catégorielle.
+
+. . .
+
+-   *Les peines plus sévères réduisent-elles vraiment la criminalité?*
+
+. . .
+
+-   *La surreprésentation des autochtones dans les milieux carcéraux a-t-elle augmentées depuis 1990?*
+
+. . .
+
+-   *En quelle mesures les quartiers défavorisés sont-ils assujeti à une présence policières accrue comparativement aux quartiers mieux nanties?*
+
+. . .
+
+::: {.callout-important title="Élément important"}
+Les méthodes quantantitatives ne sont pas seulement un ensemble de calculs. C'est d'abord **une approche systématique pour raisonner avec des données numériques et catégorielles souvent imparfaites**.
+:::
+
+------------------------------------------------------------------------
+
+## Deux regards sur un même phénomène
+
+Les méthodes quantitatives et qualitatives ne s'opposent pas. Elles répondent à des questions différentes et deviennent bien souvent complémentaires.
+
+. . .
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: columns
+::: {.column width="48%"}
+### Approche qualitative
+
+-   Cherche le sens, le contexte, l'expérience
+-   S'appuie sur des entretiens, observations, récits, dossiers
+-   Aide à comprendre le **comment** et le **pourquoi**
+:::
+
+. . .
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: {.column width="48%"}
+### Approche quantitative
+
+-   Cherche les régularités, les écarts, les tendances
+-   S'appuie sur des données numériques et catégorielles
+-   Aide à comprendre le **combien**, **à quelle fréquence**, le **pour qui**
+
+------------------------------------------------------------------------
+
+## Les méthodes quantitatives et les statistiques
+
+::: {.callout-tip title="Explication"}
+Les **méthodes quantitatives** constituent l’approche globale de recherche basée sur des données numériques et catégorielles.
+
+Les **statistiques** représente l’ensemble des techniques utilisés pour analyser les données.
+:::
+
+```{python}
+import matplotlib.pyplot as plt
+
+# Use a clean sans-serif font similar to Quarto defaults
+plt.rcParams['font.family'] = 'sans-serif'
+plt.rcParams['font.sans-serif'] = ['system-ui', 'Arial', 'Helvetica', 'sans-serif']
+
+fig, ax = plt.subplots()
+
+# Outer circle (Méthodes quantitatives)
+outer_circle = plt.Circle((0, 0), 2, fill=False, linewidth=2)
+ax.add_patch(outer_circle)
+
+# Inner circle (Statistiques)
+inner_circle = plt.Circle((0, 0), 1, fill=False, linewidth=2)
+ax.add_patch(inner_circle)
+
+# Labels
+ax.text(0, 0, "Statistiques", ha='center', va='center', fontsize=12)
+ax.text(0, -2.3, "Méthodes quantitatives", ha='center', va='center', fontsize=12)
+
+# Formatting
+ax.set_xlim(-3, 3)
+ax.set_ylim(-3, 3)
+ax.set_aspect('equal')
+ax.axis('off')
+
+plt.show()
+```
+
+## Définitions
+
+::: {.callout-note title="Méthodes quantitatives"}
+Ensemble de méthodes permettant de **résumer**, **comparer**, **interpréter** et **visualiser** des données numériques et catégorielles, tout en indiquant **le degré d'incertitude** qui accompagne ces résultats.
+:::
+
+. . .
+
+::: {.callout-note title="Données numériques"}
+Les données numériques sont des informations exprimées sous forme de nombres.
+
+*Il y a plus de 200 services de police au Canada.*
+:::
+
+. . .
+
+::: {.callout-note title="Données catégorielle"}
+Les données catégorielles sont des informations classées en catégories ou groupes.
+
+*Les victimes, les accusés et les témoins.*
+:::
+
+------------------------------------------------------------------------
+
+## D'où viennent les données criminologiques?
+
+Les données du cours ressembleront à celles utilisées dans la pratique :
+
+:::::::: source-grid
+::: source-card
+**Statistiques policières** Infractions portées à l'attention de la police.
+:::
+
+::: source-card
+**Enquêtes de victimisation** Expériences déclarées par les personnes.
+:::
+
+::: source-card
+**Données correctionnelles** Admissions, séjours, libérations.
+:::
+
+::: source-card
+**Données judiciaires** Accusations, verdicts, peines.
+:::
+
+::: source-card
+**Données socioéconomiques** Pauvreté, âge, quartier, scolarité.
+:::
+::::::::
+
+------------------------------------------------------------------------
+
+## Données incomplètes
+
+Collecter des données sur des phénomènes sociales est un défi.
+
+. . .
+
+-   Utilisation d'échantillon.
+
+. . .
+
+-   Niveau de précision variable.
+
+. . .
+
+-   Non-réponses et réponses inexacte.
+
+. . .
+
+-   Outil de collecte non-standard.
+
+. . .
+
+Ainsi, les données sociales sont rarement complètes.
+
+. . .
+
+::: callout-important
+Le premier réflexe d'un bon analyste n'est pas seulement de se demander "que disent les chiffres?" mais aussi "quelles sont leurs limites?"
+:::
+
+## Données incomplètes: le chiffre noir de la criminalité
+
+Certaines formes de victimisation ou d'infraction restent partiellement invisibles dans les statistiques officielles.
+
+```{python}
+import matplotlib.pyplot as plt
+
+# Use a clean sans-serif font similar to Quarto defaults
+plt.rcParams['font.family'] = 'sans-serif'
+plt.rcParams['font.sans-serif'] = ['system-ui', 'Arial', 'Helvetica', 'sans-serif']
+
+fig, ax = plt.subplots()
+
+# Outer circle (Méthodes quantitatives)
+outer_circle = plt.Circle((0, 0), 2, fill=False, linewidth=2)
+ax.add_patch(outer_circle)
+
+# Inner circle (Statistiques)
+inner_circle = plt.Circle((0, 0), 1, fill=False, linewidth=2)
+ax.add_patch(inner_circle)
+
+# Labels
+ax.text(0, 0, "Les infractions déclarées", ha='center', va='center', fontsize=12)
+ax.text(0, -2.3, "Ensemble des infractions", ha='center', va='center', fontsize=12)
+
+# Formatting
+ax.set_xlim(-3, 3)
+ax.set_ylim(-3, 3)
+ax.set_aspect('equal')
+ax.axis('off')
+
+plt.show()
+```
+
+::: fig-note
+Plus le phénomène est sensible, stigmatisé, privé ou difficile à déclarer, plus l'écart entre le cercle extérieur et le centre peut être grand.
+:::
+
+------------------------------------------------------------------------
+
+## Le fil conducteur de la session
+
+Pendant tout le semestre, nous reviendrons à une même question :
+
+::: big-question
+Que peut-on apprendre sur le crime, les institutions et les inégalités à partir de données toujours incomplètes?
+:::
+
+. . .
+
+::: mini-steps
+`1.` comprendre ce que font les statistiques
+
+`2.` voir pourquoi elles sont indispensables en criminologie
+
+`3.` établir les grandes idées du cours sans vous noyer dans la technique
+:::
+
+------------------------------------------------------------------------
+
+## La statistique, en une phrase
+
+::: definition-slide
+**Statistique**
+
+Ensemble de méthodes permettant de **résumer**, **comparer** et **interpréter** des données, tout en indiquant **le degré d'incertitude** qui accompagne ces résultats.
+:::
+
+. . .
+
+::::: split-emphasis
+::: split-card
+**Elle rend les données lisibles**
+
+-   tendances
+-   écarts
+-   comparaisons
+:::
+
+::: split-card
+**Elle rend le doute visible**
+
+-   hasard
+-   fragilité
+-   précision
+:::
+:::::
+
+------------------------------------------------------------------------
+
+## Pourquoi la statistique est centrale en criminologie
+
+::::: comparison-band
+::: comparison-card
+**Sans statistique**
+
+-   beaucoup d'intuitions
+-   quelques cas frappants
+-   des débats publics souvent trop rapides
+-   peu de moyens de vérifier
+:::
+
+::: {.comparison-card .is-accent}
+**Avec statistique**
+
+-   tendances plutôt qu'anecdotes
+-   comparaisons explicites
+-   évaluation de politiques
+-   mesure de l'incertitude
+:::
+:::::
+
+------------------------------------------------------------------------
+
+## Deux regards sur un même phénomène
+
+::::: columns
+::: {.column width="48%"}
+### Approche qualitative
+
+-   cherche le sens, le contexte, l'expérience
+-   s'appuie sur des entretiens, observations, récits, dossiers
+-   aide à comprendre **comment** et **pourquoi**
+:::
+
+::: {.column width="48%"}
+### Approche quantitative
+
+-   cherche des régularités, écarts, tendances
+-   s'appuie sur des variables, comptages, comparaisons, modèles
+-   aide à comprendre **combien**, **à quelle fréquence**, **pour qui**
+:::
+:::::
+
+::: accent-panel
+En criminologie, ces approches ne s'opposent pas. Elles répondent à des questions différentes et deviennent souvent plus fortes lorsqu'elles se complètent.
+:::
+
+# Les données
+
+## Les données {.section-divider data-background-color="#0d131b"}
+
+::: section-kicker
+Étape 1 du raisonnement
+:::
+
+::: section-title
+Que comptons-nous exactement?
+:::
+
+::: section-lead
+Avant toute analyse, il faut savoir d'où viennent les chiffres et ce qu'ils laissent hors champ.
+:::
+
+------------------------------------------------------------------------
+
+## D'où viennent les données criminologiques?
+
+Les données du cours ressembleront à celles utilisées dans la pratique :
+
+:::::::: source-grid
+::: source-card
+**Statistiques policières** Infractions portées à l'attention de la police.
+:::
+
+::: source-card
+**Enquêtes de victimisation** Expériences déclarées par les personnes.
+:::
+
+::: source-card
+**Données correctionnelles** Admissions, séjours, libérations.
+:::
+
+::: source-card
+**Données judiciaires** Accusations, verdicts, peines.
+:::
+
+::: source-card
+**Données socioéconomiques** Pauvreté, âge, quartier, scolarité.
+:::
+::::::::
+
+------------------------------------------------------------------------
+
+## Une première mise en garde
+
+Les données criminelles ne mesurent jamais "la criminalité" au complet.
+
+. . .
+
+Elles mesurent plutôt :
+
+-   des événements enregistrés
+-   des comportements déclarés
+-   des décisions institutionnelles
+-   des catégories administratives
+
+. . .
+
+::: callout-important
+Le premier réflexe d'un bon analyste n'est pas seulement "Que disent les chiffres?" mais aussi "Que comptent-ils exactement?"
+:::
+
+------------------------------------------------------------------------
+
+## Le chiffre noir de la criminalité
+
+Certaines formes de victimisation ou d'infraction restent partiellement invisibles dans les statistiques officielles.
+
+```{=html}
+<div class="diagram-wrap" role="img" aria-label="Diagramme géométrique de cercles imbriqués montrant que les statistiques officielles ne captent qu'une partie visible d'un phénomène plus large.">
+<svg viewBox="0 0 960 420" class="concept-svg" aria-hidden="true">
+  <circle cx="315" cy="210" r="150" class="ring-a" />
+  <circle cx="315" cy="210" r="96" class="ring-b" />
+  <circle cx="315" cy="210" r="48" class="ring-c" />
+
+  <line x1="435" y1="110" x2="620" y2="80" class="guide-line" />
+  <line x1="392" y1="200" x2="620" y2="190" class="guide-line" />
+  <line x1="355" y1="244" x2="620" y2="305" class="guide-line" />
+
+  <text x="640" y="78" class="svg-label">Phénomène social plus large</text>
+  <text x="640" y="102" class="svg-note">Actes, expériences, incidents réels</text>
+
+  <text x="640" y="188" class="svg-label">Partie portée à l'attention des institutions</text>
+  <text x="640" y="212" class="svg-note">Signalements, prises en charge, enregistrements</text>
+
+  <text x="640" y="303" class="svg-label">Statistiques officielles</text>
+  <text x="640" y="327" class="svg-note">Ce qui devient effectivement compté</text>
+</svg>
+</div>
+```
+
+::: fig-note
+Plus le phénomène est sensible, stigmatisé, privé ou difficile à déclarer, plus l'écart entre le cercle extérieur et le centre peut être grand.
+:::
+
+# Des questions aux résultats
+
+## Des questions aux résultats {.section-divider data-background-color="#0c1219"}
+
+::: section-kicker
+Étape 2 du raisonnement
+:::
+
+::: section-title
+Comment une intuition devient-elle une analyse?
+:::
+
+::: section-lead
+Le travail statistique est un enchaînement de décisions, pas une formule magique.
+:::
+
+------------------------------------------------------------------------
+
+## Une analyse quantitative suit un processus
+
+::::::: process-grid
+::: process-step
+**1. Formuler**
+
+Transformer une intuition en question précise.
+:::
+
+::: process-step
+**2. Mesurer**
+
+Choisir les variables et recueillir les données.
+:::
+
+::: process-step
+**3. Examiner**
+
+Nettoyer, décrire, comparer, visualiser.
+:::
+
+::: process-step
+**4. Interpréter**
+
+Relier les résultats à une théorie et à leurs limites.
+:::
+:::::::
+
+------------------------------------------------------------------------
+
+## Exemple simple
+
+::: question-slide
+Les quartiers plus défavorisés enregistrent-ils davantage d'infractions contre les biens?
+:::
+
+. . .
+
+Pour y répondre, il faut au minimum :
+
+-   définir ce qu'on entend par "défavorisé"
+-   définir ce qu'on entend par "criminalité"
+-   choisir l'unité d'analyse : individu, rue, secteur, ville
+-   comparer sans confondre corrélation et causalité
+
+# Décrire et inférer
+
+## Décrire et inférer {.section-divider data-background-color="#0e141d"}
+
+::: section-kicker
+Étape 3 du raisonnement
+:::
+
+::: section-title
+Voir ce qu'on observe, puis juger ce que cela permet de conclure
+:::
+
+::: section-lead
+La description organise les données. L'inférence évalue jusqu'où on peut généraliser.
+:::
+
+------------------------------------------------------------------------
+
+## Deux usages complémentaires des statistiques
+
+::::: columns
+::: {.column width="48%"}
+### Statistiques descriptives
+
+Elles répondent à la question :
+
+**Que voit-on dans les données?**
+
+-   moyennes
+-   proportions
+-   tableaux
+-   graphiques
+:::
+
+::: {.column width="48%"}
+### Statistiques inférentielles
+
+Elles répondent à la question :
+
+**Que peut-on conclure au-delà des données observées?**
+
+-   généralisation
+-   incertitude
+-   hasard
+-   précision
+:::
+:::::
+
+------------------------------------------------------------------------
+
+## Pourquoi décrire ne suffit pas toujours
+
+```{=html}
+<div class="diagram-wrap" role="img" aria-label="Diagramme géométrique comparant un petit et un grand échantillon pour illustrer qu'un grand échantillon donne un portrait plus stable.">
+<svg viewBox="0 0 960 320" class="concept-svg" aria-hidden="true">
+  <rect x="46" y="42" width="348" height="208" rx="18" class="panel-box" />
+  <rect x="566" y="42" width="348" height="208" rx="18" class="panel-box panel-accent" />
+
+  <text x="220" y="84" text-anchor="middle" class="svg-title">Petit échantillon</text>
+  <text x="220" y="116" text-anchor="middle" class="svg-note compact">Quelques observations seulement</text>
+  <text x="220" y="158" text-anchor="middle" class="svg-body compact">Un petit nombre de cas peut</text>
+  <text x="220" y="182" text-anchor="middle" class="svg-body compact">modifier fortement</text>
+  <text x="220" y="206" text-anchor="middle" class="svg-body compact">l'impression générale.</text>
+
+  <text x="740" y="84" text-anchor="middle" class="svg-title">Grand échantillon</text>
+  <text x="740" y="116" text-anchor="middle" class="svg-note compact">Beaucoup plus d'observations</text>
+  <text x="740" y="158" text-anchor="middle" class="svg-body compact">Le portrait devient en général</text>
+  <text x="740" y="182" text-anchor="middle" class="svg-body compact">plus stable, plus robuste,</text>
+  <text x="740" y="206" text-anchor="middle" class="svg-body compact">moins sensible à quelques cas.</text>
+
+  <g class="dot-field faint-dots">
+    <circle cx="126" cy="275" r="7"/><circle cx="157" cy="275" r="7"/><circle cx="188" cy="275" r="7"/><circle cx="219" cy="275" r="7"/>
+    <circle cx="250" cy="275" r="7"/><circle cx="281" cy="275" r="7"/><circle cx="312" cy="275" r="7"/><circle cx="343" cy="275" r="7"/>
+  </g>
+  <g class="dot-field accent-dots">
+    <circle cx="665" cy="265" r="6"/><circle cx="690" cy="265" r="6"/><circle cx="715" cy="265" r="6"/><circle cx="740" cy="265" r="6"/><circle cx="765" cy="265" r="6"/><circle cx="790" cy="265" r="6"/><circle cx="815" cy="265" r="6"/>
+    <circle cx="652" cy="287" r="6"/><circle cx="677" cy="287" r="6"/><circle cx="702" cy="287" r="6"/><circle cx="727" cy="287" r="6"/><circle cx="752" cy="287" r="6"/><circle cx="777" cy="287" r="6"/><circle cx="802" cy="287" r="6"/><circle cx="827" cy="287" r="6"/>
+    <circle cx="665" cy="309" r="6"/><circle cx="690" cy="309" r="6"/><circle cx="715" cy="309" r="6"/><circle cx="740" cy="309" r="6"/><circle cx="765" cy="309" r="6"/><circle cx="790" cy="309" r="6"/><circle cx="815" cy="309" r="6"/>
+  </g>
+</svg>
+</div>
+```
+
+::: fig-note
+L'idée du jour n'est pas la formule. C'est l'intuition suivante : un résultat fondé sur très peu d'observations est plus fragile.
+:::
+
+# Population et échantillon
+
+## Population et échantillon {.section-divider data-background-color="#0c1219"}
+
+::: section-kicker
+Étape 4 du raisonnement
+:::
+
+::: section-title
+Ce que nous observons n'est presque jamais le tout
+:::
+
+::: section-lead
+L'inférence commence avec cette asymétrie simple : peu de cas observés, beaucoup de conclusions tentantes.
+:::
+
+------------------------------------------------------------------------
+
+## L'idée clé
+
+Nous observons rarement toute la population qui nous intéresse.
+
+. . .
+
+::: accent-panel
+Le plus souvent, nous travaillons avec un **échantillon**, puis nous essayons de dire quelque chose de défendable sur une **population**.
+:::
+
+------------------------------------------------------------------------
+
+## Voir la différence
+
+```{=html}
+<div class="diagram-wrap" role="img" aria-label="Un ensemble de points représente une population et un sous-ensemble mis en évidence représente l'échantillon observé.">
+<svg viewBox="0 0 960 360" class="concept-svg" aria-hidden="true">
+  <text x="165" y="52" text-anchor="middle" class="svg-label">Population</text>
+  <text x="485" y="52" text-anchor="middle" class="svg-label">Unités sélectionnées</text>
+  <text x="790" y="52" text-anchor="middle" class="svg-label">Échantillon observé</text>
+
+  <rect x="30" y="75" width="270" height="210" rx="22" class="panel-box" />
+  <rect x="350" y="75" width="270" height="210" rx="22" class="panel-box" />
+  <rect x="685" y="75" width="210" height="210" rx="22" class="panel-box panel-accent" />
+  <line x1="315" y1="182" x2="335" y2="182" class="guide-line strong-line" />
+  <line x1="635" y1="182" x2="655" y2="182" class="guide-line strong-line" />
+  <polygon points="335,182 319,174 319,190" class="arrow-head" />
+  <polygon points="655,182 639,174 639,190" class="arrow-head" />
+
+  <g class="dot-field faint-dots">
+    <circle cx="85" cy="125" r="7"/><circle cx="125" cy="125" r="7"/><circle cx="165" cy="125" r="7"/><circle cx="205" cy="125" r="7"/><circle cx="245" cy="125" r="7"/>
+    <circle cx="105" cy="165" r="7"/><circle cx="145" cy="165" r="7"/><circle cx="185" cy="165" r="7"/><circle cx="225" cy="165" r="7"/><circle cx="265" cy="165" r="7"/>
+    <circle cx="85" cy="205" r="7"/><circle cx="125" cy="205" r="7"/><circle cx="165" cy="205" r="7"/><circle cx="205" cy="205" r="7"/><circle cx="245" cy="205" r="7"/>
+    <circle cx="105" cy="245" r="7"/><circle cx="145" cy="245" r="7"/><circle cx="185" cy="245" r="7"/><circle cx="225" cy="245" r="7"/><circle cx="265" cy="245" r="7"/>
+  </g>
+  <g class="dot-field accent-dots">
+    <circle cx="405" cy="125" r="8"/><circle cx="485" cy="125" r="8"/><circle cx="445" cy="165" r="8"/>
+    <circle cx="525" cy="165" r="8"/><circle cx="405" cy="205" r="8"/><circle cx="485" cy="205" r="8"/><circle cx="445" cy="245" r="8"/>
+  </g>
+
+  <g class="dot-field faint-dots">
+    <circle cx="405" cy="125" r="7"/><circle cx="445" cy="125" r="7"/><circle cx="485" cy="125" r="7"/><circle cx="525" cy="125" r="7"/><circle cx="565" cy="125" r="7"/>
+    <circle cx="425" cy="165" r="7"/><circle cx="465" cy="165" r="7"/><circle cx="505" cy="165" r="7"/><circle cx="545" cy="165" r="7"/><circle cx="585" cy="165" r="7"/>
+    <circle cx="405" cy="205" r="7"/><circle cx="445" cy="205" r="7"/><circle cx="485" cy="205" r="7"/><circle cx="525" cy="205" r="7"/><circle cx="565" cy="205" r="7"/>
+    <circle cx="425" cy="245" r="7"/><circle cx="465" cy="245" r="7"/><circle cx="505" cy="245" r="7"/><circle cx="545" cy="245" r="7"/><circle cx="585" cy="245" r="7"/>
+  </g>
+  <g class="dot-field accent-dots">
+    <circle cx="445" cy="125" r="8"/><circle cx="525" cy="125" r="8"/><circle cx="465" cy="165" r="8"/>
+    <circle cx="545" cy="165" r="8"/><circle cx="445" cy="205" r="8"/><circle cx="525" cy="205" r="8"/><circle cx="465" cy="245" r="8"/>
+  </g>
+
+  <g class="dot-field accent-dots">
+    <circle cx="740" cy="130" r="8"/><circle cx="790" cy="130" r="8"/><circle cx="840" cy="130" r="8"/>
+    <circle cx="715" cy="180" r="8"/><circle cx="765" cy="180" r="8"/><circle cx="815" cy="180" r="8"/><circle cx="865" cy="180" r="8"/>
+    <circle cx="740" cy="230" r="8"/><circle cx="790" cy="230" r="8"/><circle cx="840" cy="230" r="8"/>
+  </g>
+</svg>
+</div>
+```
+
+::: fig-note
+Dans le cours, une grande partie du raisonnement statistique consiste à ne pas oublier ce passage de l'échantillon vers la population.
+:::
+
+------------------------------------------------------------------------
+
+## Ce que l'inférence essaie de faire
+
+L'objectif central de l'inférence statistique est de déterminer si un résultat observé dans un échantillon :
+
+-   reflète vraisemblablement un phénomène plus général
+-   ou pourrait être compatible avec le hasard et l'imprécision
+
+# Corrélation et causalité
+
+## Corrélation et causalité {.section-divider data-background-color="#0d131b"}
+
+::: section-kicker
+Étape 5 du raisonnement
+:::
+
+::: section-title
+Pourquoi une association n'est pas encore une explication
+:::
+
+::: section-lead
+Le lien observé entre deux variables peut être réel, trompeur ou partiel. Il faut apprendre à résister au raccourci causal.
+:::
+
+------------------------------------------------------------------------
+
+## Une des erreurs les plus fréquentes
+
+Quand deux variables évoluent ensemble, il est tentant de conclure qu'une cause l'autre.
+
+. . .
+
+En criminologie, cette erreur est coûteuse :
+
+-   elle produit de mauvaises explications
+-   elle encourage des politiques mal ciblées
+-   elle transforme parfois une association brute en slogan causal
+
+------------------------------------------------------------------------
+
+## Exemple classique
+
+```{=html}
+<div class="diagram-wrap causal-diagram" role="img" aria-label="Schéma conceptuel montrant que la taille de la ville peut influencer à la fois le nombre de policiers et le nombre d'infractions enregistrées.">
+<svg viewBox="0 0 960 320" class="concept-svg" aria-hidden="true">
+  <rect x="365" y="28" width="230" height="62" rx="18" class="panel-box panel-accent" />
+  <text x="480" y="66" text-anchor="middle" class="svg-title">Taille de la ville</text>
+
+  <rect x="92" y="188" width="300" height="80" rx="18" class="panel-box" />
+  <rect x="528" y="188" width="364" height="80" rx="18" class="panel-box" />
+  <text x="242" y="236" text-anchor="middle" class="svg-body emph">Plus de policiers</text>
+  <text x="710" y="230" text-anchor="middle" class="svg-body emph tight">Plus d'infractions</text>
+  <text x="710" y="252" text-anchor="middle" class="svg-body emph tight">enregistrées</text>
+
+  <line x1="440" y1="92" x2="312" y2="188" class="guide-line strong-line" />
+  <line x1="520" y1="92" x2="708" y2="188" class="guide-line strong-line" />
+  <polygon points="312,188 328,184 319,171" class="arrow-head" />
+  <polygon points="708,188 701,172 692,184" class="arrow-head" />
+</svg>
+</div>
+```
+
+::: fig-note
+Deux phénomènes peuvent évoluer ensemble sans que l'un soit la cause directe de l'autre.
+:::
+
+------------------------------------------------------------------------
+
+## Ce que montre vraiment ce schéma
+
+Il peut être vrai que :
+
+-   les grandes villes ont plus de policiers
+-   les grandes villes enregistrent aussi plus d'infractions
+
+. . .
+
+Le lien observé entre police et criminalité peut donc être **associé à une troisième variable**, plutôt qu'à un effet causal direct.
+
+# Ce que vous apprendrez
+
+## Ce que vous apprendrez {.section-divider data-background-color="#0c1219"}
+
+::: section-kicker
+Ce que ce cours entraîne
+:::
+
+::: section-title
+Une discipline de lecture, de jugement et d'interprétation
+:::
+
+::: section-lead
+Le but n'est pas d'impressionner avec du vocabulaire technique, mais de raisonner plus proprement.
+:::
+
+------------------------------------------------------------------------
+
+## Les compétences du cours
+
+À la fin de la session, vous devriez être capables de :
+
+-   lire un article quantitatif sans vous laisser impressionner par le vocabulaire
+-   produire plus tard des tableaux et des graphiques clairs
+-   interpréter des résultats avec prudence
+-   reconnaître les limites d'une base de données
+-   distinguer description, inférence et causalité
+
+------------------------------------------------------------------------
+
+## Ce que le cours ne vous demande pas
+
+Vous n'avez pas besoin :
+
+-   d'aimer les calculs pour eux-mêmes
+-   d'être "fort en maths" au sens scolaire du terme
+-   de mémoriser des formules sans comprendre leur utilité
+
+Votre travail intellectuel consistera surtout à **poser de bonnes questions** et à **interpréter avec rigueur** ce que les données permettent, et ne permettent pas, d'affirmer.
+
+# Les outils
+
+## Les outils {.section-divider data-background-color="#0d131b"}
+
+::: section-kicker
+Méthode de travail
+:::
+
+::: section-title
+Pourquoi le cours passera par du code
+:::
+
+::: section-lead
+Parce qu'une analyse convaincante doit aussi être vérifiable et reproductible.
+:::
+
+------------------------------------------------------------------------
+
+## Pourquoi nous utiliserons R
+
+R est un langage de programmation conçu pour travailler avec des données.
+
+. . .
+
+Nous l'utiliserons parce qu'il est :
+
+-   gratuit
+-   puissant
+-   largement employé en recherche
+-   reproductible, donc plus rigoureux qu'un travail fait à la main
+
+------------------------------------------------------------------------
+
+## La logique de la reproductibilité
+
+Une analyse reproductible laisse une trace explicite :
+
+-   des données utilisées
+-   des transformations effectuées
+-   des figures produites
+-   des choix analytiques
+
+. . .
+
+::: accent-panel
+L'objectif n'est pas seulement d'obtenir un résultat.
+
+L'objectif est de pouvoir montrer **comment** ce résultat a été produit.
+:::
+
+# Conclusion
+
+## Conclusion {.section-divider data-background-color="#0b1016"}
+
+::: section-kicker
+Idée directrice
+:::
+
+::: section-title
+Les statistiques servent moins à certifier qu'à mieux questionner
+:::
+
+::: section-lead
+Le cours commence ici : apprendre à transformer des chiffres en arguments discutables, plutôt qu'en slogans.
+:::
+
+------------------------------------------------------------------------
+
+## L'idée à retenir après ce premier cours
+
+La statistique est moins une machine à produire des certitudes qu'un ensemble d'outils pour **réduire l'arbitraire** dans notre manière de raisonner sur le monde social.
+
+. . .
+
+En criminologie, elle est utile parce qu'elle nous aide à passer :
+
+-   d'impressions à des comparaisons
+-   d'anecdotes à des tendances
+-   d'arguments rhétoriques à des preuves discutables, mais explicites
+
+------------------------------------------------------------------------
+
+## Pour la suite
+
+Au prochain cours, nous commencerons à travailler plus concrètement avec les données :
+
+-   types de variables
+-   niveaux de mesure
+-   premières descriptions numériques et graphiques
+
+::: closing-line
+Le cours ne vous demande pas de croire aveuglément aux chiffres. Il vous demande d'apprendre à mieux les interroger.
+:::
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
