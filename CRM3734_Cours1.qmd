@@ -4,18 +4,24 @@ subtitle: "CRM3734: Méthodes quantitatives en criminologie"
 author: "Jean-Denis David, Ph.D."
 date: today
 date-format: "YYYY"
-format: revealjs
+format:
+  revealjs:
+    height: 800
+    width: 1400
+  pdf: default
+filters:
+  - remove-pauses.lua
 editor: visual
-height: 800
-width: 1400
 ---
 
 ```{r}
+#| echo: false
+#| message: false
 library(reticulate)
 use_virtualenv("~/.virtualenvs/r-reticulate", required = TRUE)
 ```
 
----
+------------------------------------------------------------------------
 
 ## Pourquoi apprendre les méthodes quantitatives?
 
@@ -23,15 +29,15 @@ Les criminologues pose des questions importantes pour lesquels les réponses rel
 
 . . .
 
-- *Les peines plus sévères réduisent-elles vraiment la criminalité?*
+-   *Les peines plus sévères réduisent-elles vraiment la criminalité?*
 
 . . .
 
-- *La surreprésentation des autochtones dans les milieux carcéraux a-t-elle augmentées depuis 1990?*
+-   *La surreprésentation des autochtones dans les milieux carcéraux a-t-elle augmentées depuis 1990?*
 
 . . .
 
-- *En quelle mesures les quartiers défavorisés sont-ils assujeti à une présence policières accrue comparativement aux quartiers mieux nanties?*
+-   *En quelle mesures les quartiers défavorisés sont-ils assujeti à une présence policières accrue comparativement aux quartiers mieux nanties?*
 
 . . .
 
@@ -39,39 +45,35 @@ Les criminologues pose des questions importantes pour lesquels les réponses rel
 Les méthodes quantantitatives ne sont pas seulement un ensemble de calculs. C'est d'abord **une approche systématique pour raisonner avec des données numériques et catégorielles** souvent imparfaites.
 :::
 
----
+------------------------------------------------------------------------
 
 ## Deux regards sur un même phénomène
 
 Les méthodes quantitatives et qualitatives ne s'opposent pas. Elles répondent à des questions différentes et deviennent bien souvent complémentaires.
-  
+
 \
 
 . . .
 
-::: columns
-
+::::: columns
 ::: {.column width="50%"}
 #### Approche qualitative
 
-* Cherche le sens, le contexte, l'expérience.
-* S'appuie sur des entretiens, observations, récits, dossiers.
-* Aide à comprendre le **comment** et le **pourquoi**.
-
+-   Cherche le sens, le contexte, l'expérience.
+-   S'appuie sur des entretiens, observations, récits, dossiers.
+-   Aide à comprendre le **comment** et le **pourquoi**.
 :::
 
 ::: {.column width="50%"}
 #### Approche quantitative
 
-* Cherche les régularités, les écarts, les tendances.
-* S'appuie sur des données numériques et catégorielles.
-* Aide à comprendre le **combien**, **à quelle fréquence**, **pour qui.**
-
+-   Cherche les régularités, les écarts, les tendances.
+-   S'appuie sur des données numériques et catégorielles.
+-   Aide à comprendre le **combien**, **à quelle fréquence**, **pour qui.**
 :::
+:::::
 
-:::
-
----
+------------------------------------------------------------------------
 
 ## Les méthodes quantitatives et les statistiques
 
@@ -85,15 +87,22 @@ Les **statistiques** représente l’ensemble des techniques utilisés pour anal
 
 . . .
 
-```{=html}
-<div style="display:flex; justify-content:center; align-items:center;">
-  <svg width="700" height="700" viewBox="-3.5 -2.1 7 7" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="0" cy="0" r="2" fill="none" stroke="black" stroke-width="0.06"/>
-    <circle cx="0" cy="0" r="1" fill="none" stroke="black" stroke-width="0.06"/>
-    <text x="0" y="0.05" text-anchor="middle" dominant-baseline="middle" font-size="0.30" font-family="Arial, sans-serif">Statistiques</text>
-    <text x="0" y="2.4" text-anchor="middle" dominant-baseline="middle" font-size="0.30" font-family="Arial, sans-serif">Méthodes quantitatives</text>
-  </svg>
-</div>
+```{r}
+#| echo: false
+#| message: false
+#| fig-align: center
+#| fig-height: 4
+#| fig-width: 4
+library(ggplot2)
+library(ggforce)
+
+ggplot() +
+  geom_circle(aes(x0 = 0, y0 = 0, r = 2), color = "black", fill = NA, linewidth = 0.5) +
+  geom_circle(aes(x0 = 0, y0 = 0, r = 1), color = "black", fill = NA, linewidth = 0.5) +
+  annotate("text", x = 0, y = 0,   label = "Statistiques",          size = 4.5) +
+  annotate("text", x = 0, y = 2.5, label = "Méthodes quantitatives", size = 4.5) +
+  coord_fixed(xlim = c(-3.5, 3.5), ylim = c(-3, 3.5)) +
+  theme_void()
 ```
 
 ## Définitions
@@ -118,7 +127,7 @@ Les données catégorielles sont des informations classées en catégories ou gr
 *Les victimes, les accusés et les témoins.*
 :::
 
----
+------------------------------------------------------------------------
 
 ## D'où viennent les données criminologiques?
 
@@ -146,7 +155,7 @@ Les données du cours ressembleront à celles utilisées dans la pratique :
 :::
 ::::::::
 
----
+------------------------------------------------------------------------
 
 ## Données incomplètes
 
@@ -182,35 +191,26 @@ Le premier réflexe d'un bon analyste n'est pas seulement de se demander "que di
 
 Certaines formes de victimisation ou d'infraction restent partiellement invisibles dans les statistiques officielles.
 
-```{=html}
-<div style="display:flex; justify-content:center; align-items:center;">
-  <svg width="525" height="525" viewBox="-3.5 -3.5 7 7" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="0" cy="0" r="2" fill="none" stroke="black" stroke-width="0.08"/>
-    <circle cx="0" cy="0" r="1" fill="none" stroke="black" stroke-width="0.08"/>
-    <text x="0" y="0.05" text-anchor="middle" dominant-baseline="middle" font-size="0.63" font-family="Arial, sans-serif">Les infractions déclarées</text>
-    <text x="0" y="2.4" text-anchor="middle" dominant-baseline="middle" font-size="0.63" font-family="Arial, sans-serif">Ensemble des infractions</text>
-  </svg>
-</div>
+```{r}
+#| echo: false
+#| message: false
+#| fig-align: center
+#| fig-height: 4
+#| fig-width: 4
+ggplot() +
+  geom_circle(aes(x0 = 0, y0 = 0, r = 2), color = "black", fill = NA, linewidth = 0.5) +
+  geom_circle(aes(x0 = 0, y0 = 0, r = 1), color = "black", fill = NA, linewidth = 0.5) +
+  annotate("text", x = 0, y = 0,   label = "Les infractions déclarées", size = 4) +
+  annotate("text", x = 0, y = 2.5, label = "Ensemble des infractions",  size = 4) +
+  coord_fixed(xlim = c(-3.5, 3.5), ylim = c(-3, 3.5)) +
+  theme_void()
 ```
 
 ::: fig-note
 Plus le phénomène est sensible, stigmatisé, privé ou difficile à déclarer, plus l'écart entre le cercle extérieur et le centre peut être grand.
 :::
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-------
+------------------------------------------------------------------------
 
 ## Le fil conducteur de la session
 
@@ -230,7 +230,7 @@ Que peut-on apprendre sur le crime, les institutions et les inégalités à part
 `3.` établir les grandes idées du cours sans vous noyer dans la technique
 :::
 
----
+------------------------------------------------------------------------
 
 ## La statistique, en une phrase
 
@@ -381,27 +381,27 @@ Le premier réflexe d'un bon analyste n'est pas seulement "Que disent les chiffr
 
 Certaines formes de victimisation ou d'infraction restent partiellement invisibles dans les statistiques officielles.
 
-```{=html}
-<div class="diagram-wrap" role="img" aria-label="Diagramme géométrique de cercles imbriqués montrant que les statistiques officielles ne captent qu'une partie visible d'un phénomène plus large.">
-<svg viewBox="0 0 960 420" class="concept-svg" aria-hidden="true">
-  <circle cx="315" cy="210" r="150" class="ring-a" />
-  <circle cx="315" cy="210" r="96" class="ring-b" />
-  <circle cx="315" cy="210" r="48" class="ring-c" />
-
-  <line x1="435" y1="110" x2="620" y2="80" class="guide-line" />
-  <line x1="392" y1="200" x2="620" y2="190" class="guide-line" />
-  <line x1="355" y1="244" x2="620" y2="305" class="guide-line" />
-
-  <text x="640" y="78" class="svg-label">Phénomène social plus large</text>
-  <text x="640" y="102" class="svg-note">Actes, expériences, incidents réels</text>
-
-  <text x="640" y="188" class="svg-label">Partie portée à l'attention des institutions</text>
-  <text x="640" y="212" class="svg-note">Signalements, prises en charge, enregistrements</text>
-
-  <text x="640" y="303" class="svg-label">Statistiques officielles</text>
-  <text x="640" y="327" class="svg-note">Ce qui devient effectivement compté</text>
-</svg>
-</div>
+```{r}
+#| echo: false
+#| message: false
+#| fig-align: center
+#| fig-height: 4
+#| fig-width: 9
+ggplot() +
+  geom_circle(aes(x0 = 0, y0 = 0, r = 3), color = "#333", fill = NA, linewidth = 0.7) +
+  geom_circle(aes(x0 = 0, y0 = 0, r = 2), color = "#555", fill = NA, linewidth = 0.7) +
+  geom_circle(aes(x0 = 0, y0 = 0, r = 1), color = "#777", fill = NA, linewidth = 0.7) +
+  annotate("segment", x = 3*cos(pi/5),  xend = 4, y = 3*sin(pi/5),  yend =  2.5, color = "#888") +
+  annotate("segment", x = 2*cos(pi/12), xend = 4, y = 2*sin(pi/12), yend =  0.0, color = "#888") +
+  annotate("segment", x = cos(-pi/4),   xend = 4, y = sin(-pi/4),   yend = -2.5, color = "#888") +
+  annotate("text", x = 4.2, y =  2.8, label = "Phénomène social plus large",                    hjust = 0, fontface = "bold", size = 3.5) +
+  annotate("text", x = 4.2, y =  2.2, label = "Actes, expériences, incidents réels",            hjust = 0, size = 3, color = "#555") +
+  annotate("text", x = 4.2, y =  0.3, label = "Partie portée à l'attention des institutions",   hjust = 0, fontface = "bold", size = 3.5) +
+  annotate("text", x = 4.2, y = -0.3, label = "Signalements, prises en charge, enregistrements", hjust = 0, size = 3, color = "#555") +
+  annotate("text", x = 4.2, y = -2.2, label = "Statistiques officielles",                       hjust = 0, fontface = "bold", size = 3.5) +
+  annotate("text", x = 4.2, y = -2.8, label = "Ce qui devient effectivement compté",            hjust = 0, size = 3, color = "#555") +
+  coord_fixed(xlim = c(-4, 13), ylim = c(-4.5, 4.5)) +
+  theme_void()
 ```
 
 ::: fig-note
@@ -523,36 +523,32 @@ Elles répondent à la question :
 
 ## Pourquoi décrire ne suffit pas toujours
 
-```{=html}
-<div class="diagram-wrap" role="img" aria-label="Diagramme géométrique comparant un petit et un grand échantillon pour illustrer qu'un grand échantillon donne un portrait plus stable.">
-<svg viewBox="0 0 960 320" class="concept-svg" aria-hidden="true">
-  <rect x="46" y="42" width="348" height="208" rx="18" class="panel-box" />
-  <rect x="566" y="42" width="348" height="208" rx="18" class="panel-box panel-accent" />
-
-  <text x="220" y="84" text-anchor="middle" class="svg-title">Petit échantillon</text>
-  <text x="220" y="116" text-anchor="middle" class="svg-note compact">Quelques observations seulement</text>
-  <text x="220" y="158" text-anchor="middle" class="svg-body compact">Un petit nombre de cas peut</text>
-  <text x="220" y="182" text-anchor="middle" class="svg-body compact">modifier fortement</text>
-  <text x="220" y="206" text-anchor="middle" class="svg-body compact">l'impression générale.</text>
-
-  <text x="740" y="84" text-anchor="middle" class="svg-title">Grand échantillon</text>
-  <text x="740" y="116" text-anchor="middle" class="svg-note compact">Beaucoup plus d'observations</text>
-  <text x="740" y="158" text-anchor="middle" class="svg-body compact">Le portrait devient en général</text>
-  <text x="740" y="182" text-anchor="middle" class="svg-body compact">plus stable, plus robuste,</text>
-  <text x="740" y="206" text-anchor="middle" class="svg-body compact">moins sensible à quelques cas.</text>
-
-  <g class="dot-field faint-dots">
-    <circle cx="126" cy="275" r="7"/><circle cx="157" cy="275" r="7"/><circle cx="188" cy="275" r="7"/><circle cx="219" cy="275" r="7"/>
-    <circle cx="250" cy="275" r="7"/><circle cx="281" cy="275" r="7"/><circle cx="312" cy="275" r="7"/><circle cx="343" cy="275" r="7"/>
-  </g>
-  <g class="dot-field accent-dots">
-    <circle cx="665" cy="265" r="6"/><circle cx="690" cy="265" r="6"/><circle cx="715" cy="265" r="6"/><circle cx="740" cy="265" r="6"/><circle cx="765" cy="265" r="6"/><circle cx="790" cy="265" r="6"/><circle cx="815" cy="265" r="6"/>
-    <circle cx="652" cy="287" r="6"/><circle cx="677" cy="287" r="6"/><circle cx="702" cy="287" r="6"/><circle cx="727" cy="287" r="6"/><circle cx="752" cy="287" r="6"/><circle cx="777" cy="287" r="6"/><circle cx="802" cy="287" r="6"/><circle cx="827" cy="287" r="6"/>
-    <circle cx="665" cy="309" r="6"/><circle cx="690" cy="309" r="6"/><circle cx="715" cy="309" r="6"/><circle cx="740" cy="309" r="6"/><circle cx="765" cy="309" r="6"/><circle cx="790" cy="309" r="6"/><circle cx="815" cy="309" r="6"/>
-  </g>
-</svg>
-</div>
+```{r}
+#| echo: false
+#| message: false
+#| fig-align: center
+#| fig-height: 3.5
+#| fig-width: 8
+dots_small <- data.frame(x = seq(0.7, 3.8, by = 0.6), y = rep(0.4, 6))
+dots_large <- data.frame(
+  x = c(seq(5.3, 9.2, by = 0.5), seq(5.5, 9.0, by = 0.5), seq(5.3, 9.2, by = 0.5)),
+  y = c(rep(0.8, 8), rep(0.5, 8), rep(0.2, 8))
+)
+ggplot() +
+  geom_rect(aes(xmin = 0,   xmax = 4.5, ymin = 0, ymax = 5), fill = NA,       color = "#aaa",    linewidth = 0.7) +
+  geom_rect(aes(xmin = 5.5, xmax = 10,  ymin = 0, ymax = 5), fill = "#f0f4f8", color = "#7788aa", linewidth = 0.7) +
+  annotate("text", x = 2.25, y = 4.5, label = "Petit échantillon",                fontface = "bold", size = 4.5) +
+  annotate("text", x = 2.25, y = 3.9, label = "Quelques observations seulement",  size = 3.2, color = "#666") +
+  annotate("text", x = 2.25, y = 2.7, label = "Un petit nombre de cas peut\nmodifier fortement l'impression générale.", size = 3.2, lineheight = 1.3) +
+  annotate("text", x = 7.75, y = 4.5, label = "Grand échantillon",                fontface = "bold", size = 4.5) +
+  annotate("text", x = 7.75, y = 3.9, label = "Beaucoup plus d'observations",     size = 3.2, color = "#666") +
+  annotate("text", x = 7.75, y = 2.7, label = "Le portrait devient plus stable,\nplus robuste, moins sensible à quelques cas.", size = 3.2, lineheight = 1.3) +
+  geom_point(data = dots_small, aes(x = x, y = y), size = 3,   color = "#aaa") +
+  geom_point(data = dots_large, aes(x = x, y = y), size = 2.5, color = "#7788aa") +
+  coord_cartesian(xlim = c(-0.5, 10.5), ylim = c(-0.2, 6)) +
+  theme_void()
 ```
+
 
 ::: fig-note
 L'idée du jour n'est pas la formule. C'est l'intuition suivante : un résultat fondé sur très peu d'observations est plus fragile.
@@ -590,50 +586,35 @@ Le plus souvent, nous travaillons avec un **échantillon**, puis nous essayons d
 
 ## Voir la différence
 
-```{=html}
-<div class="diagram-wrap" role="img" aria-label="Un ensemble de points représente une population et un sous-ensemble mis en évidence représente l'échantillon observé.">
-<svg viewBox="0 0 960 360" class="concept-svg" aria-hidden="true">
-  <text x="165" y="52" text-anchor="middle" class="svg-label">Population</text>
-  <text x="485" y="52" text-anchor="middle" class="svg-label">Unités sélectionnées</text>
-  <text x="790" y="52" text-anchor="middle" class="svg-label">Échantillon observé</text>
+```{r}
+#| echo: false
+#| message: false
+#| fig-align: center
+#| fig-height: 4
+#| fig-width: 9
+pop  <- expand.grid(x = seq(0.4, 2.8, by = 0.48), y = seq(1.1, 3.9, by = 0.56))
+sel  <- pop[c(3, 7, 12, 16, 20, 25, 30), ]
+pop2 <- data.frame(x = pop$x + 3.8, y = pop$y)
+sel2 <- data.frame(x = sel$x + 3.8,  y = sel$y)
+sel3 <- data.frame(x = sel$x + 7.3,  y = sel$y)
 
-  <rect x="30" y="75" width="270" height="210" rx="22" class="panel-box" />
-  <rect x="350" y="75" width="270" height="210" rx="22" class="panel-box" />
-  <rect x="685" y="75" width="210" height="210" rx="22" class="panel-box panel-accent" />
-  <line x1="315" y1="182" x2="335" y2="182" class="guide-line strong-line" />
-  <line x1="635" y1="182" x2="655" y2="182" class="guide-line strong-line" />
-  <polygon points="335,182 319,174 319,190" class="arrow-head" />
-  <polygon points="655,182 639,174 639,190" class="arrow-head" />
-
-  <g class="dot-field faint-dots">
-    <circle cx="85" cy="125" r="7"/><circle cx="125" cy="125" r="7"/><circle cx="165" cy="125" r="7"/><circle cx="205" cy="125" r="7"/><circle cx="245" cy="125" r="7"/>
-    <circle cx="105" cy="165" r="7"/><circle cx="145" cy="165" r="7"/><circle cx="185" cy="165" r="7"/><circle cx="225" cy="165" r="7"/><circle cx="265" cy="165" r="7"/>
-    <circle cx="85" cy="205" r="7"/><circle cx="125" cy="205" r="7"/><circle cx="165" cy="205" r="7"/><circle cx="205" cy="205" r="7"/><circle cx="245" cy="205" r="7"/>
-    <circle cx="105" cy="245" r="7"/><circle cx="145" cy="245" r="7"/><circle cx="185" cy="245" r="7"/><circle cx="225" cy="245" r="7"/><circle cx="265" cy="245" r="7"/>
-  </g>
-  <g class="dot-field accent-dots">
-    <circle cx="405" cy="125" r="8"/><circle cx="485" cy="125" r="8"/><circle cx="445" cy="165" r="8"/>
-    <circle cx="525" cy="165" r="8"/><circle cx="405" cy="205" r="8"/><circle cx="485" cy="205" r="8"/><circle cx="445" cy="245" r="8"/>
-  </g>
-
-  <g class="dot-field faint-dots">
-    <circle cx="405" cy="125" r="7"/><circle cx="445" cy="125" r="7"/><circle cx="485" cy="125" r="7"/><circle cx="525" cy="125" r="7"/><circle cx="565" cy="125" r="7"/>
-    <circle cx="425" cy="165" r="7"/><circle cx="465" cy="165" r="7"/><circle cx="505" cy="165" r="7"/><circle cx="545" cy="165" r="7"/><circle cx="585" cy="165" r="7"/>
-    <circle cx="405" cy="205" r="7"/><circle cx="445" cy="205" r="7"/><circle cx="485" cy="205" r="7"/><circle cx="525" cy="205" r="7"/><circle cx="565" cy="205" r="7"/>
-    <circle cx="425" cy="245" r="7"/><circle cx="465" cy="245" r="7"/><circle cx="505" cy="245" r="7"/><circle cx="545" cy="245" r="7"/><circle cx="585" cy="245" r="7"/>
-  </g>
-  <g class="dot-field accent-dots">
-    <circle cx="445" cy="125" r="8"/><circle cx="525" cy="125" r="8"/><circle cx="465" cy="165" r="8"/>
-    <circle cx="545" cy="165" r="8"/><circle cx="445" cy="205" r="8"/><circle cx="525" cy="205" r="8"/><circle cx="465" cy="245" r="8"/>
-  </g>
-
-  <g class="dot-field accent-dots">
-    <circle cx="740" cy="130" r="8"/><circle cx="790" cy="130" r="8"/><circle cx="840" cy="130" r="8"/>
-    <circle cx="715" cy="180" r="8"/><circle cx="765" cy="180" r="8"/><circle cx="815" cy="180" r="8"/><circle cx="865" cy="180" r="8"/>
-    <circle cx="740" cy="230" r="8"/><circle cx="790" cy="230" r="8"/><circle cx="840" cy="230" r="8"/>
-  </g>
-</svg>
-</div>
+ggplot() +
+  geom_rect(aes(xmin = 0,   xmax = 3.3, ymin = 0.5, ymax = 4.5), fill = NA,        color = "#aaa",    linewidth = 0.7) +
+  geom_rect(aes(xmin = 3.8, xmax = 7.1, ymin = 0.5, ymax = 4.5), fill = NA,        color = "#aaa",    linewidth = 0.7) +
+  geom_rect(aes(xmin = 7.3, xmax = 10,  ymin = 0.5, ymax = 4.5), fill = "#f0f4f8", color = "#7788aa", linewidth = 0.7) +
+  annotate("text", x = 1.65, y = 5.0, label = "Population",          fontface = "bold", size = 4) +
+  annotate("text", x = 5.45, y = 5.0, label = "Unités sélectionnées", fontface = "bold", size = 4) +
+  annotate("text", x = 8.65, y = 5.0, label = "Échantillon observé",  fontface = "bold", size = 4) +
+  annotate("segment", x = 3.3, xend = 3.75, y = 2.5, yend = 2.5,
+           arrow = arrow(length = unit(0.25, "cm"), type = "closed"), color = "#555", linewidth = 0.8) +
+  annotate("segment", x = 7.1, xend = 7.25, y = 2.5, yend = 2.5,
+           arrow = arrow(length = unit(0.25, "cm"), type = "closed"), color = "#555", linewidth = 0.8) +
+  geom_point(data = pop,  aes(x = x, y = y), size = 2.5, color = "#ccc") +
+  geom_point(data = pop2, aes(x = x, y = y), size = 2.5, color = "#ccc") +
+  geom_point(data = sel2, aes(x = x, y = y), size = 3.5, color = "#7788aa") +
+  geom_point(data = sel3, aes(x = x, y = y), size = 3.5, color = "#7788aa") +
+  coord_cartesian(xlim = c(-0.3, 10.5), ylim = c(0.2, 5.8)) +
+  theme_void()
 ```
 
 ::: fig-note
@@ -683,24 +664,25 @@ En criminologie, cette erreur est coûteuse :
 
 ## Exemple classique
 
-```{=html}
-<div class="diagram-wrap causal-diagram" role="img" aria-label="Schéma conceptuel montrant que la taille de la ville peut influencer à la fois le nombre de policiers et le nombre d'infractions enregistrées.">
-<svg viewBox="0 0 960 320" class="concept-svg" aria-hidden="true">
-  <rect x="365" y="28" width="230" height="62" rx="18" class="panel-box panel-accent" />
-  <text x="480" y="66" text-anchor="middle" class="svg-title">Taille de la ville</text>
-
-  <rect x="92" y="188" width="300" height="80" rx="18" class="panel-box" />
-  <rect x="528" y="188" width="364" height="80" rx="18" class="panel-box" />
-  <text x="242" y="236" text-anchor="middle" class="svg-body emph">Plus de policiers</text>
-  <text x="710" y="230" text-anchor="middle" class="svg-body emph tight">Plus d'infractions</text>
-  <text x="710" y="252" text-anchor="middle" class="svg-body emph tight">enregistrées</text>
-
-  <line x1="440" y1="92" x2="312" y2="188" class="guide-line strong-line" />
-  <line x1="520" y1="92" x2="708" y2="188" class="guide-line strong-line" />
-  <polygon points="312,188 328,184 319,171" class="arrow-head" />
-  <polygon points="708,188 701,172 692,184" class="arrow-head" />
-</svg>
-</div>
+```{r}
+#| echo: false
+#| message: false
+#| fig-align: center
+#| fig-height: 3.5
+#| fig-width: 8
+ggplot() +
+  geom_rect(aes(xmin = 3,   xmax = 7,  ymin = 3.5, ymax = 5),   fill = "#e8edf5", color = "#7788aa", linewidth = 0.8) +
+  geom_rect(aes(xmin = 0,   xmax = 4,  ymin = 0,   ymax = 1.5), fill = NA,        color = "#aaa",    linewidth = 0.7) +
+  geom_rect(aes(xmin = 6,   xmax = 10, ymin = 0,   ymax = 1.5), fill = NA,        color = "#aaa",    linewidth = 0.7) +
+  annotate("text", x = 5,    y = 4.25, label = "Taille de la ville",             fontface = "bold", size = 4.5) +
+  annotate("text", x = 2,    y = 0.75, label = "Plus de policiers",              size = 4) +
+  annotate("text", x = 8,    y = 0.75, label = "Plus d'infractions enregistrées", size = 4) +
+  annotate("segment", x = 4.2, xend = 2.5, y = 3.5, yend = 1.5,
+           arrow = arrow(length = unit(0.25, "cm"), type = "closed"), color = "#555", linewidth = 0.8) +
+  annotate("segment", x = 5.8, xend = 7.5, y = 3.5, yend = 1.5,
+           arrow = arrow(length = unit(0.25, "cm"), type = "closed"), color = "#555", linewidth = 0.8) +
+  coord_cartesian(xlim = c(-0.5, 10.5), ylim = c(-0.5, 6)) +
+  theme_void()
 ```
 
 ::: fig-note
@@ -853,5 +835,6 @@ Au prochain cours, nous commencerons à travailler plus concrètement avec les d
 ::: closing-line
 Le cours ne vous demande pas de croire aveuglément aux chiffres. Il vous demande d'apprendre à mieux les interroger.
 :::
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+::: :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:::
