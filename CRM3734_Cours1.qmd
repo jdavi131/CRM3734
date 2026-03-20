@@ -54,6 +54,7 @@ Les méthodes quantitatives et qualitatives ne s'opposent pas. Elles répondent 
 * Cherche le sens, le contexte, l'expérience
 * S'appuie sur des entretiens, observations, récits, dossiers
 * Aide à comprendre le **comment** et le **pourquoi**
+
 :::
 
 . . .
